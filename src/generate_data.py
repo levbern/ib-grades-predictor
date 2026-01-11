@@ -46,7 +46,7 @@ if __name__ == "__main__":
     print("Generating data...")
     df = generate_smart_data(20000)
     
-    save_path = "ib_grades_predictor/data/student_data.csv"
+    save_path = "data/student_data.csv"
     df.to_csv(save_path, index=False)
     
     print(f"Data successfully saved to {save_path}")
