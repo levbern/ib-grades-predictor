@@ -7,8 +7,22 @@ def predict():
     try:
         study = float(input("Hours of study per week: "))
         social = float(input("Hours on social media: "))
-        print("Available subjects: Math AA HL, Physics HL, Chem HL, Eng A Lit SL, French B SL, Econ SL")
-        subject = input("Your subject (type exactly): ").strip()
+        print("Select your subject:")
+        subjects_list = ['Math AA HL', 'Physics HL', 'Chem HL', 'Eng A Lit SL', 'French B SL', 'Econ SL']
+        for i, sub in enumerate(subjects_list, 1):
+            print(f"[{i}] {sub}")
+        
+        while True:
+            try:
+                choice = int(input("Enter the number of your subject: "))
+                if 1 <= choice <= len(subjects_list):
+                    subject = subjects_list[choice - 1]
+                    print(f"Selected: {subject}")
+                    break
+                else:
+                    print(f"Please enter a number between 1 and {len(subjects_list)}.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
     except ValueError:
         print("Error: Invalid input data!")
         return
@@ -26,8 +40,8 @@ def predict():
     
     if subject_col in input_df.columns:
         input_df[subject_col] = 1
-    else:
-        print(f"Note: Subject '{subject}' is considered basic (or entered incorrectly).")
+    # else:
+    #     print(f"Note: Subject '{subject}' is considered basic (or entered incorrectly).")
 
     # 3. PREDICTION
     prediction = model.predict(input_df)[0]
